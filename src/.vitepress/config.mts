@@ -139,7 +139,7 @@ export default withMermaid(defineConfig({
     },
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/snz1' }
+      { icon: 'github', link: 'https://github.com/snz1dp' }
     ],
 
     search: {
