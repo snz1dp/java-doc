@@ -6,8 +6,8 @@ import { ref } from 'vue'
 
 const lightboxRef = ref<InstanceType<typeof ImageLightbox>>()
 
-useImageClickZoom((src, alt) => {
-  lightboxRef.value?.open(src, alt)
+useImageClickZoom((src, alt, svgHtml) => {
+  lightboxRef.value?.open(src, alt, svgHtml)
 })
 </script>
 

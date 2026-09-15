@@ -26,6 +26,8 @@
           @mousedown.prevent="startDrag"
         >
           <img v-if="imageUrl" :src="imageUrl" :alt="imageAlt" draggable="false" />
+          <!-- Mermaid SVG 直接内嵌渲染，保留内部样式 -->
+          <div v-else-if="svgHtml" class="image-lightbox-svg" v-html="svgHtml"></div>
         </div>
       </div>
     </Transition>
@@ -38,6 +40,7 @@ import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 const visible = ref(false)
 const imageUrl = ref('')
 const imageAlt = ref('')
+const svgHtml = ref('')
 const scale = ref(1)
 const pan = ref({ x: 0, y: 0 })
 
@@ -49,9 +52,10 @@ let isDragging = false
 let dragStart = { x: 0, y: 0 }
 let panStart = { x: 0, y: 0 }
 
-function open(src: string, alt: string) {
+function open(src: string, alt: string, svg?: string) {
   imageUrl.value = src
   imageAlt.value = alt
+  svgHtml.value = svg || ''
   scale.value = 1
   pan.value = { x: 0, y: 0 }
   visible.value = true
@@ -64,6 +68,7 @@ function open(src: string, alt: string) {
 function close() {
   visible.value = false
   imageUrl.value = ''
+  svgHtml.value = ''
   document.body.style.overflow = ''
 }
 
@@ -202,6 +207,25 @@ defineExpose({ open, close })
   max-width: 90vw;
   max-height: 85vh;
   object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Mermaid SVG 内嵌渲染样式 */
+.image-lightbox-svg {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-lightbox-svg svg {
+  max-width: 90vw;
+  max-height: 85vh;
+  width: auto;
+  height: auto;
+  background: #fff;
   border-radius: 4px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
