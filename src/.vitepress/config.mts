@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 
-const basePath = process.env.VITEPRESS_BASE_PATH || '/snz1/java/docs/'
+const basePath = process.env.VITEPRESS_BASE_PATH || '/java-doc/'
 
 export default withMermaid(defineConfig({
   title: 'snz1-java',
