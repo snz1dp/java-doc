@@ -2,8 +2,8 @@
 layout: home
 
 hero:
-  name: "snz1 Java 框架"
-  text: "微服务基础框架文档"
+  name: "长沙慧码至一"
+  text: "Java 微服务框架文档"
   tagline: 基于 Spring Boot 3.5.x + JDK 21 的企业级微服务基础设施
   actions:
     - theme: brand

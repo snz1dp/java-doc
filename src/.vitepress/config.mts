@@ -4,8 +4,8 @@ import { withMermaid } from 'vitepress-plugin-mermaid'
 const basePath = process.env.VITEPRESS_BASE_PATH || '/java-doc/'
 
 export default withMermaid(defineConfig({
-  title: 'snz1-java',
-  description: 'snz1 Java 微服务基础框架官方文档',
+  title: '长沙慧码至一java微服务框架',
+  description: '长沙慧码至一 Java 微服务基础框架官方文档',
   lang: 'zh-CN',
   base: basePath,
   cleanUrls: true,
@@ -20,6 +20,7 @@ export default withMermaid(defineConfig({
 
   themeConfig: {
     nav: [
+      { component: 'RootNavLink', props: { text: '太乙智启', href: 'https://snz1.cn/taiyi/docs/', title: '通用智能体平台 — 自主可控的多智能体与 RAG 应用基础设施' } },
       { text: '框架概览', link: '/overview/' },
       { text: '使用指南', link: '/guide/getting-started' },
       { text: '基础框架', link: '/framework/spring-boot3-app' },
