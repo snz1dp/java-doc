@@ -4,28 +4,45 @@ import { onMounted, onUnmounted } from 'vue'
  * 通过事件委托监听文档内容区域内的图片点击事件，
  * 触发图片放大预览回调。
  *
- * 仅处理 .vp-doc 容器内的 img 元素，避免影响 UI 图标等。
+ * 处理 .vp-doc 容器内的 img 元素和 Mermaid SVG 图表。
  */
 export function useImageClickZoom(onZoom: (src: string, alt: string) => void) {
   function handleClick(e: MouseEvent) {
     const target = e.target as HTMLElement
-    if (target.tagName !== 'IMG') return
 
-    // 确保是文档内容区域内的图片
+    // 确保是文档内容区域内的
     const docContainer = target.closest('.vp-doc')
     if (!docContainer) return
 
-    // 排除 Mermaid SVG（已有独立的 Mermaid 点击预览）
+    // 处理普通图片
+    if (target.tagName === 'IMG') {
+      const img = target as HTMLImageElement
+      const src = img.currentSrc || img.src
+      if (!src) return
+
+      e.preventDefault()
+      e.stopPropagation()
+      onZoom(src, img.alt || '')
+      return
+    }
+
+    // 处理 Mermaid SVG 图表
     const mermaidContainer = target.closest('.mermaid')
-    if (mermaidContainer) return
+    if (mermaidContainer) {
+      const svg = mermaidContainer.querySelector('svg')
+      if (!svg) return
 
-    const img = target as HTMLImageElement
-    const src = img.currentSrc || img.src
-    if (!src) return
+      e.preventDefault()
+      e.stopPropagation()
 
-    e.preventDefault()
-    e.stopPropagation()
-    onZoom(src, img.alt || '')
+      // 克隆 SVG 并序列化为 data URL
+      const clone = svg.cloneNode(true) as SVGElement
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
+      const svgData = new XMLSerializer().serializeToString(clone)
+      const dataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgData)
+
+      onZoom(dataUrl, 'Mermaid 图表')
+    }
   }
 
   onMounted(() => {

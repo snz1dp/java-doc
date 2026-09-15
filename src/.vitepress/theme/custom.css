@@ -8,6 +8,15 @@
   opacity: 0.92;
 }
 
+/* ========== Mermaid 图表点击放大提示 ========== */
+.vp-doc .mermaid {
+  cursor: zoom-in;
+}
+
+.vp-doc .mermaid:hover {
+  opacity: 0.92;
+}
+
 /* ========== 全局表格全宽 ========== */
 .vp-doc table {
   width: 100% !important;
