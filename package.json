@@ -1,0 +1,19 @@
+{
+  "name": "snz1-java-docs",
+  "version": "1.0.0",
+  "description": "snz1 Java 框架官方文档站",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev src",
+    "docs:build": "vitepress build src",
+    "docs:preview": "vitepress preview src"
+  },
+  "devDependencies": {
+    "@rollup/wasm-node": "^4.62.5",
+    "vitepress": "^1.6.3"
+  },
+  "dependencies": {
+    "mermaid": "^11.16.1",
+    "vitepress-plugin-mermaid": "^2.0.17"
+  }
+}

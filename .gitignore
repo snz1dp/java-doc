@@ -1,0 +1,6 @@
+node_modules/
+src/.vitepress/dist/
+src/.vitepress/cache/
+out/
+.DS_Store
+.snz1dp/

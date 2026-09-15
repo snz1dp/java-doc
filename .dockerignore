@@ -1,0 +1,11 @@
+# 依赖与构建产物：容器内重新安装，避免把 macOS 平台的原生二进制（esbuild 等）带入 Linux 镜像
+node_modules
+src/.vitepress/cache
+src/.vitepress/dist
+
+# 与文档构建无关的大目录
+.snz1dp
+
+# 系统与杂项
+.DS_Store
+.github
